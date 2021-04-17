@@ -8,26 +8,18 @@ interface BoardProps {
 }
 
 const Board: React.FC<BoardProps> = ({ squares, onClick }) => {
-  const renderSquare = (i: number) => {
-    return <Square value={squares[i]} onClick={() => onClick(i)} />;
-  };
   return (
     <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
+      {[...Array(3)].map((_, i) => {
+        return (
+          <div className="board-row" key={i}>
+            {[...Array(3)].map((_, j) => {
+              const index = 3 * i + j;
+              return <Square value={squares[index]} onClick={() => onClick(index)} key={j}></Square>;
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };

@@ -3,12 +3,6 @@ import Board from './Board';
 import Moves from './Moves';
 import type { History, ISquare } from '../interface';
 
-interface GameState {
-  history: History[];
-  stepNumber: number;
-  xIsNext: boolean;
-}
-
 const Game: React.FC = () => {
   const [history, setHistory] = useState<History[]>([{ squares: Array(9).fill(null) }]);
   const [stepNumber, setStepnumber] = useState<number>(0);
