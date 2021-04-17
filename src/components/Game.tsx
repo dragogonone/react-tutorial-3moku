@@ -8,6 +8,9 @@ const Game: React.FC = () => {
   const [stepNumber, setStepnumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
 
+  /**
+   * マスがクリックされたときの挙動
+   */
   const handleClick = (i: number) => {
     const _history = history.slice(0, stepNumber + 1);
     const current = _history[_history.length - 1];
@@ -27,6 +30,9 @@ const Game: React.FC = () => {
     setXIsNext(!xIsNext);
   };
 
+  /**
+   * 指定した局面に戻る
+   */
   const jumpTo = (step: number) => {
     setStepnumber(step);
     setXIsNext(step % 2 === 0);
@@ -49,6 +55,9 @@ const Game: React.FC = () => {
   );
 };
 
+/**
+ * 勝利者を判定する。
+ */
 function calculateWinner(squares: Array<ISquare>) {
   const lines = [
     [0, 1, 2],
