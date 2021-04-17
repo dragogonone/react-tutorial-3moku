@@ -1,18 +1,19 @@
 import React from 'react';
 import { History } from '../interface';
+
 interface MovesProps {
   history: History[];
-  jumpTo: (move: number) => void;
+  jumpTo: (turn: number) => void;
 }
 
 const Moves: React.FC<MovesProps> = ({ history, jumpTo }) => {
   return (
     <ol>
-      {history.map((_, move) => {
-        const desc = move ? 'Go to move #' + move : 'Go to game start';
+      {history.map((step, turn) => {
+        const desc = turn ? `col: ${step.col}, row: ${step.row}` : 'Go to game start';
         return (
-          <li key={move}>
-            <button onClick={() => jumpTo(move)}>{desc}</button>
+          <li key={turn}>
+            <button onClick={() => jumpTo(turn)}>{desc}</button>
           </li>
         );
       })}

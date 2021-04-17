@@ -4,9 +4,16 @@ import Moves from './Moves';
 import type { History, ISquare } from '../interface';
 
 const Game: React.FC = () => {
-  const [history, setHistory] = useState<History[]>([{ squares: Array(9).fill(null) }]);
+  const [history, setHistory] = useState<History[]>([{ squares: Array(9).fill(null), col: 0, row: 0 }]);
   const [stepNumber, setStepnumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<boolean>(true);
+
+  /**
+   * マスのindexを行列に変換
+   */
+  const toColRow = (move: number) => {
+    return [Math.ceil((move + 1) / 3), (move % 3) + 1];
+  };
 
   /**
    * マスがクリックされたときの挙動
@@ -19,10 +26,13 @@ const Game: React.FC = () => {
       return;
     }
     squares[i] = xIsNext ? 'X' : 'O';
+    const [col, row] = toColRow(i);
     setHistory(
       _history.concat([
         {
           squares: squares,
+          col: col,
+          row: row,
         },
       ])
     );
